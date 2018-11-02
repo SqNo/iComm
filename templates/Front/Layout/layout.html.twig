@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+        <link rel="stylesheet" href="style.css" />
+        <title>{% block title %}{% endblock %} - My Webpage</title>
+    {% endblock %}
+</head>
+<body>
+
+    {% block header %}
+        {% include 'header.html.twig' %}
+    {% endblock %}
+    
+    {% block body %}{% endblock %}
+
+    {% block footer %}
+        {% include 'footer.html.twig' %}
+    {% endblock %}
+
+</body>
+</html>
