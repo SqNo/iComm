@@ -6,7 +6,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .autoProvidejQuery()
     .enableSourceMaps(!Encore.isProduction())
-    .configureRuntimeEnvironment('dev')
+    .enableVersioning()
 ;
 
 const firstConfig = Encore.getWebpackConfig();
