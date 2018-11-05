@@ -1,15 +1,17 @@
+var Encore = require('@symfony/webpack-encore');
+
 Encore
-    .autoProvidejQuery();
+    .setOutputPath('public/build/')
+    .setPublicPath('/build')
+    .addEntry('app', './assets/js/app.js')
+    .autoProvidejQuery()
+    .enableSourceMaps(!Encore.isProduction())
+    .configureRuntimeEnvironment('dev')
+;
 
-const webpack = require("webpack");
-const path = require("path");
+const firstConfig = Encore.getWebpackConfig();
 
-let config = {
-    entry: "./src/Assets/app.js",
-    output: {
-        path: path.resolve(__dirname, "./public/build"),
-        filename: "./app.js"
-    }
-}
+// Set a unique name for the config (needed later!)
+firstConfig.name = 'firstConfig';
 
-module.exports = config;
+module.exports = firstConfig;
