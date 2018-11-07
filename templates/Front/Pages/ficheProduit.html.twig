@@ -1,0 +1,52 @@
+{% extends "./Front/Layout/layout.html.twig" %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-12">
+            {% for message in app.flashes('notice') %}
+                <div class="flash-notice">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="card mt-4">
+                <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+                <div class="card-body">
+                    <h3 class="card-title">{{ product.nom }}</h3>
+                    <h4>{{ product.prix }} €</h4>
+                    <p class="card-text">{{ product.description }}</p>
+                    {% if product.note %}
+                        Note : {{ product.note }}
+                    {% else %}
+                        Aucune note
+                    {% endif %}
+                    <a href="{{ path('add_to_cart', { 'productId' : product.id }) }}"><button type="button" class="btn btn-sm btn-outline-secondary float-right">Ajouter au panier</button></a>
+                </div>
+            </div>
+            <!-- /.card -->
+
+            <div class="card card-outline-secondary my-4">
+                <div class="card-header">
+                    Avis des utilisateurs
+                </div>
+                <div class="card-body">
+                {% if product.avis %}
+                        <p> {{ product.avis }} </p>
+                        <small class="text-muted">NOM DU COMMENTEUR</small>
+                    {% else %}
+                    Il n'y a pas d'avis enregistré pour le moment
+                {% endif %}
+                </div>
+            </div>
+            <!-- /.card -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+    </div>
+
+</div>
+<!-- /.container -->
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "./Front/Layout/layout.html.twig" %}
+
+{% block topbartext %}
+    CATALOGUE
+{% endblock %}
+
+{% block body %}
+    <main role="main">
+
+        <div class="album py-5 bg-light">
+            <div class="container-fluid">
+
+                {% for message in app.flashes('notice') %}
+                        <div class="row flash-notice text-center mb-3">
+                            <div class="col">
+                                <p class="text-center">{{ message }}</p>
+                            </div>
+                        </div>
+                {% endfor %}
+
+                <div class="row">
+                    <div class="col-md-3 catalogue-sidebar">
+                        <h3 class="text-center mb-3">
+                            Recherche par catégorie
+                        </h3>
+                        <ul class="list-group">
+                            <a href="{{ path('catalogue', { 'category' : 'canard' }) }}">
+                                <li class="list-group-item active">Canards</li>
+                            </a>
+                            <a href="{{ path('catalogue', { 'category' : 'espadon' }) }}">
+                                <li class="list-group-item">Espadons</li>
+                            </a>
+                            <a href="{{ path('catalogue', { 'category' : 'jambon' }) }}">
+                                <li class="list-group-item">Jambons</li>
+                            </a>
+                            <a href="{{ path('catalogue', { 'category' : 'girafe' }) }}">
+                                <li class="list-group-item">Girafes</li>
+                            </a>
+                            <a href="{{ path('catalogue', { 'category' : 'sousmarin' }) }}">
+                                <li class="list-group-item">Sous-Marins</li>
+                            </a>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            {% if products %}
+                                {% for product in products %}
+                                    <div class="col-md-3">
+                                        <div class="card mb-4 shadow-sm">
+                                            <div class="text-center mt-3">{{ product.prix }} €</div>
+                                            <img src="{{ asset('img/img.jpg ') }}" class="card-img-top"
+                                                 data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
+                                                 alt="Card image cap">
+                                            <div class="card-body">
+                                                <p class="card-text">{{ product.description }}</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="btn-group">
+                                                        <a href="{{ path('fiche_produit', { "id" : product.id }) }}">
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-outline-secondary">Détail
+                                                            </button>
+                                                        </a>
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                            Edit
+                                                        </button>
+                                                    </div>
+                                                    <small class="text-muted">
+                                                        {% if product.note %}
+                                                            Note : {{ product.note }}
+                                                        {% else %}
+                                                            Aucune note
+                                                        {% endif %}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                Aucun produit enregistré
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </main>
+
+{% endblock %}

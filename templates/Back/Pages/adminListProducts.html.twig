@@ -1,0 +1,48 @@
+{% extends "./Back/Layout/layout.html.twig" %}
+
+{% block topbar %} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center"> Gestion des produits </h1>
+                <a href="{{ path('admin_add_product') }}">Ajouter un produit</a>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Avis</th>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Suppr</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in products if products %}
+                    <tr>
+                        <th>{{ product.id }}</th>
+                        <td>{{ product.nom }}</td>
+                        <td>{{ product.categorie }}</td>
+                        <td>{{ product.prix }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.note }}</td>
+                        <td>{{ product.avis }}</td>
+                        <td>{{ product.photo }}</td>
+                        <td><a href="{{ path('admin_list_product', { 'status' : 'edit' , 'id' : product.id }) }}">Edit</a></td>
+                        <td><a href="{{ path('admin_list_product', { 'status' : 'suppr' , 'id' : product.id} ) }}">Suppr</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

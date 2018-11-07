@@ -1,0 +1,15 @@
+mon_compte:
+  path: /mon-compte
+  controller: App\Controller\UserController::monCompte
+
+admin_index:
+  path: /admin
+  controller: App\Controller\UserController::adminIndex
+
+admin_add_product:
+  path: /admin/ajouter-produit
+  controller: App\Controller\UserController::adminAddProduct
+
+admin_list_product:
+  path: /admin/liste-produits
+  controller: App\Controller\UserController::adminListProduct

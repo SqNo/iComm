@@ -1,0 +1,15 @@
+{% extends "./Back/Layout/layout.html.twig" %}
+
+{% block topbar %} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center"> Welcome to the dark side </h1>
+                <a href="{{ path('admin_list_product') }}">Gestion des produits</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

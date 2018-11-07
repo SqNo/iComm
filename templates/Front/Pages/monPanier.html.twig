@@ -1,0 +1,50 @@
+{% extends "./Front/Layout/layout.html.twig" %}
+
+{% block topbartext %}
+    MON PANIER
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <!-- /.col-lg-3 -->
+            <div class="col-lg-12">
+                {% if products %}
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Article</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Retirer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set i = 0 %}
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.nom }}</td>
+                            <td>{{ product.description }}</td>
+                            <td>{{ product.prix }}</td>
+                            <td>{{ product.photo }}</td>
+                            <td> <a href="{{ path('mon_panier', { 'retirer' : i } ) }}"><button type="button" class="btn btn-secondary">retirer</button></a></td>
+                        </tr>
+                    <!-- /.card -->
+                        {% set i = i + 1 %}
+                    {% endfor %}
+                      </tbody>
+                </table>
+                <a href="{{ path('catalogue') }}"><button type="button" class="btn btn-secondary mb-5">Retour</button></a>
+                <a href="{{ path('catalogue') }}"><button type="button" class="btn btn-secondary mb-5">Payer</button></a>
+                {% else %}
+                <h1 class="mb-4">Vous n'avez pas de produits dans votre panier ! <br>Ajoutez en vite pour me faire gagner de l'argent en masse !</h1>
+                <a href="{{ path('catalogue') }}"><button type="button" class="btn btn-secondary mb-5">Retour sur une page avec un peu plus de contenu</button></a>
+                {% endif %}
+            </div>
+                <!-- /.card -->
+        </div>
+            <!-- /.col-lg-9 -->
+    </div>
+    <!-- /.container -->
+{% endblock %}

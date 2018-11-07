@@ -1,3 +1,46 @@
+user_routes:
+  resource: './routes/user_routes.yaml'
+  prefix: /utilisateur
+
 index:
     path: /
     controller: App\Controller\HomeController::index
+
+catalogue:
+  path: /catalogue
+  controller: App\Controller\HomeController::catalogue
+
+fiche_produit:
+  path: /fiche-produit/{id}
+  controller: App\Controller\HomeController::ficheProduit
+  defaults:
+    id: 1
+
+mon_panier:
+  path: /mon-panier
+  controller: App\Controller\HomeController::monPanier
+
+add_to_cart:
+  path: /add/{productId}
+  controller: App\Controller\HomeController::addToCart
+  defaults:
+    id: 1
+
+mentions_legales:
+  path: /mentions-legales
+  controller: App\Controller\HomeController::mentionsLegales
+
+conditions_generales:
+  path: /conditions-generales
+  controller: App\Controller\HomeController::conditionsGenerales
+
+plan_site:
+  path: /plan-site
+  controller: App\Controller\HomeController::planSite
+
+contact:
+  path: /contact
+  controller: App\Controller\HomeController::contact
+
+logout:
+  path: /logout
