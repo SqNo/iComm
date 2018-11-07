@@ -23,7 +23,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $product = new Article();
             $product->setNom('canard ' . $i);
-            $product->setPrix(mt_rand(10, 100));
+            $product->setPrix(mt_rand(10, 1000));
             $product->setDescription("Un super produit !");
             $product->setCategorie("canard");
             $product->setPhoto("aze");
@@ -34,7 +34,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $product = new Article();
             $product->setNom('espadon ' . $i);
-            $product->setPrix(mt_rand(10, 100));
+            $product->setPrix(mt_rand(10, 1000));
             $product->setDescription("Un super produit !");
             $product->setCategorie("espadon");
             $product->setPhoto("aze");
@@ -45,7 +45,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $product = new Article();
             $product->setNom('jambon ' . $i);
-            $product->setPrix(mt_rand(10, 100));
+            $product->setPrix(mt_rand(10, 1000));
             $product->setDescription("Un super produit !");
             $product->setCategorie("jambon");
             $product->setPhoto("aze");
@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $product = new Article();
             $product->setNom('girafe ' . $i);
-            $product->setPrix(mt_rand(10, 100));
+            $product->setPrix(mt_rand(10, 1000));
             $product->setDescription("Un super produit !");
             $product->setCategorie("girafe");
             $product->setPhoto("aze");
@@ -67,7 +67,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $product = new Article();
             $product->setNom('sousmarin ' . $i);
-            $product->setPrix(mt_rand(10, 100));
+            $product->setPrix(mt_rand(10, 1000));
             $product->setDescription("Un super produit !");
             $product->setCategorie("sousmarin");
             $product->setPhoto("aze");
