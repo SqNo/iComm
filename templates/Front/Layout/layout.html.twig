@@ -14,7 +14,12 @@
     {% block topbar %}
         <section class="jumbotron text-center">
             <div class="container">
-                <h1 class="jumbotron-heading">Bienvenue sur iComm</h1>
+                <h1 class="jumbotron-heading">
+                    Bienvenue sur iComm
+                    {% if app.user %}
+                        <br>Chèr(e) {{ app.user.name }}
+                    {% endif %}
+                </h1>
                 <p>
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <a href="{{ path('logout') }}" class="btn btn-secondary my-2">Se déconnecter</a>
@@ -26,6 +31,11 @@
                 <p class="lead text-muted">
                 {% block topbartext %}Premier site de vente en ligne qui vend tout et n'importe quoi, livré sans design !<br>Ci dessous une selections de nos meilleurs articles{% endblock %}
                 </p>
+                {% for message in app.flashes('notice') %}
+                    <div class="flash-notice bg-info">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             </div>
         </section>
     {% endblock %}

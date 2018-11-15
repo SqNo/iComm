@@ -37,11 +37,25 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $newUser = $form->getData();
+            if($em->getRepository(User::class)->findOneBy(["email" => $newUser->getEmail()]))
+            {
+                $this->addFlash(
+                    'notice',
+                    'Vous etes déja enregistré, connectez vous !'
+                );
+               return $this->redirectToRoute("index");
+            }
             $newUser->setPassword($encoder->encodePassword($newUser, $newUser->getPassword()));
             $newUser->setRoles(['ROLE_USER']);
 
             $em->persist($newUser);
             $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Votre compte a bien été enregistré !'
+            );
+           return $this->redirectToRoute("index");
         }
 
         return $this->render('security/register.html.twig', [

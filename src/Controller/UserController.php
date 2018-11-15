@@ -7,7 +7,9 @@ use App\Form\ArticleType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -58,7 +60,20 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $product = $form->getData();
+            $file = new UploadedFile($product->getPhoto(), "Photo");
 
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+
+            try {
+                $file->move(
+                    $this->getParameter('images_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                echo "RED ALERT!! FILE CORRUPTED !!!!!!!";
+            }
+
+            $product->setPhoto($fileName);
             $this->em->persist($product);
             $this->em->flush();
 
@@ -98,5 +113,9 @@ class UserController extends AbstractController
         ]);
     }
 
+    private function generateUniqueFileName()
+    {
+        return md5(uniqid());
+    }
 
 }

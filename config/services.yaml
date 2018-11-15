@@ -31,3 +31,4 @@ services:
 
 parameters:
   locale: 'en'
+  images_directory: '%kernel.project_dir%/public/img'

@@ -75,6 +75,17 @@ class AppFixtures extends Fixture
             $product->setAvis("VRAIMENT un super produit");
             $manager->persist($product);
         }
+
+        $product = new Article();
+        $product->setNom('specialDelivery');
+        $product->setPrix(mt_rand(10, 1000));
+        $product->setDescription("Livraison spéciale !!");
+        $product->setCategorie("sousmarin");
+        $product->setPhoto("boom.jpg");
+        $product->setNote(5);
+        $product->setAvis("Ca va faire BOOM!");
+        $manager->persist($product);
+
         //USERS
 
         $user = new User();

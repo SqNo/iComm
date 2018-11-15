@@ -34,9 +34,10 @@
                         <td>{{ product.description }}</td>
                         <td>{{ product.note }}</td>
                         <td>{{ product.avis }}</td>
-                        <td>{{ product.photo }}</td>
+                        <td><a href="{{ asset('img/' ~ product.photo) }}">View brochure (PDF)</a></td>
                         <td><a href="{{ path('admin_list_product', { 'status' : 'edit' , 'id' : product.id }) }}">Edit</a></td>
                         <td><a href="{{ path('admin_list_product', { 'status' : 'suppr' , 'id' : product.id} ) }}">Suppr</a></td>
+
                     </tr>
                     {% endfor %}
                     </tbody>
