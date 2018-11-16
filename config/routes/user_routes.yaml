@@ -13,3 +13,11 @@ admin_add_product:
 admin_list_product:
   path: /admin/liste-produits
   controller: App\Controller\UserController::adminListProduct
+
+admin_add_user:
+  path: /admin/ajouter-utilisateur
+  controller: App\Controller\UserController::adminAddUser
+
+admin_list_user:
+  path: /admin/liste-utilisateurs
+  controller: App\Controller\UserController::adminListUser

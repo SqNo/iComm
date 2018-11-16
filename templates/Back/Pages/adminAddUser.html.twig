@@ -1,0 +1,22 @@
+{% extends "./Back/Layout/layout.html.twig" %}
+
+{% block topbar %} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% for message in app.flashes('notice') %}
+                    <div class="flash-notice text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <h1 class="text-center"> Ajout d'un utilisateur </h1>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

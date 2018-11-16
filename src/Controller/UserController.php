@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\User;
 use App\Form\ArticleType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -113,9 +114,62 @@ class UserController extends AbstractController
         ]);
     }
 
+    public function adminAddUser(Request $request)
+    {
+        if($id = $request->query->get("id")){
+            $user = $this->em->find(User::class, $id);
+        }
+        else
+            $user = new User();
+
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            $this->em->persist($user);
+            $this->em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Utilisateur enregistré !'
+            );
+            return $this->redirectToRoute("admin_add_user");
+        }
+
+        return $this->render("Back/Pages/adminAddUser.html.twig",[
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function adminListUser(Request $request)
+    {
+        if($request->query->get("status") === "suppr"){
+            $id = $request->query->get("id");
+            $toDeleteUser = $this->em->find(User::class, $id);
+
+            if($toDeleteUser !== null){
+                $this->em->remove($toDeleteUser);
+                $this->em->flush();
+            }
+        }
+
+        if($request->query->get("status") === "edit"){
+            $id = $request->query->get("id");
+            return $this->redirectToRoute("admin_add_user", ['id' => $id ]);
+        }
+
+        $allUsers = $this->em->getRepository(User::class)->findAll();
+
+        return $this->render("Back/Pages/adminListUsers.html.twig",[
+            'users' => $allUsers,
+        ]);
+    }
+
+    //FUNCTIONS
     private function generateUniqueFileName()
     {
         return md5(uniqid());
     }
-
 }

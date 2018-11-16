@@ -1,0 +1,36 @@
+{% extends "./Back/Layout/layout.html.twig" %}
+
+{% block topbar %} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center"> Gestion des Utilisateurs </h1>
+                <div class="text-center mb-3">
+                    <a href="{{ path('admin_add_user') }}"> <button class="text-center">Ajouter un utilisateur</button></a>
+                </div>
+
+                <table class="table table-list-article">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users if users %}
+                        <tr>
+                            <th>{{ user.id }}</th>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.email}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
