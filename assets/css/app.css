@@ -59,3 +59,9 @@ footer {
 footer p {
     margin-bottom: .25rem;
 }
+
+/*ARTICLES*/
+.table-list-article img{
+    width: 100px;
+    height: 100px;
+}

@@ -26,7 +26,7 @@ class AppFixtures extends Fixture
             $product->setPrix(mt_rand(10, 1000));
             $product->setDescription("Un super produit !");
             $product->setCategorie("canard");
-            $product->setPhoto("aze");
+            $product->setPhoto("canard.jpg");
             $product->setNote(5);
             $product->setAvis("VRAIMENT un super produit");
             $manager->persist($product);
@@ -37,7 +37,7 @@ class AppFixtures extends Fixture
             $product->setPrix(mt_rand(10, 1000));
             $product->setDescription("Un super produit !");
             $product->setCategorie("espadon");
-            $product->setPhoto("aze");
+            $product->setPhoto("espadon.jpg");
             $product->setNote(5);
             $product->setAvis("VRAIMENT un super produit");
             $manager->persist($product);
@@ -48,7 +48,7 @@ class AppFixtures extends Fixture
             $product->setPrix(mt_rand(10, 1000));
             $product->setDescription("Un super produit !");
             $product->setCategorie("jambon");
-            $product->setPhoto("aze");
+            $product->setPhoto("jambon.jpg");
             $product->setNote(5);
             $product->setAvis("VRAIMENT un super produit");
             $manager->persist($product);
@@ -59,7 +59,7 @@ class AppFixtures extends Fixture
             $product->setPrix(mt_rand(10, 1000));
             $product->setDescription("Un super produit !");
             $product->setCategorie("girafe");
-            $product->setPhoto("aze");
+            $product->setPhoto("girafe.jpg");
             $product->setNote(5);
             $product->setAvis("VRAIMENT un super produit");
             $manager->persist($product);
@@ -70,7 +70,7 @@ class AppFixtures extends Fixture
             $product->setPrix(mt_rand(10, 1000));
             $product->setDescription("Un super produit !");
             $product->setCategorie("sousmarin");
-            $product->setPhoto("aze");
+            $product->setPhoto("sousmarin.jpg");
             $product->setNote(5);
             $product->setAvis("VRAIMENT un super produit");
             $manager->persist($product);

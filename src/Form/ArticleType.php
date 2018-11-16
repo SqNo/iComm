@@ -9,7 +9,9 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\CallbackTransformer;
 
 class ArticleType extends AbstractType
 {
@@ -34,7 +36,8 @@ class ArticleType extends AbstractType
             ->add('avis')
             ->add('photo', FileType::class,
                 [
-                    'label' => 'Photo'
+                    'label' => 'Photo',
+                    'data_class' => null,
                 ])
             ->add('Enregistrer', SubmitType::class)
         ;

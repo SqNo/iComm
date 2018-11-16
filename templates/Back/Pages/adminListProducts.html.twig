@@ -7,9 +7,11 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center"> Gestion des produits </h1>
-                <a href="{{ path('admin_add_product') }}">Ajouter un produit</a>
+                <div class="text-center mb-3">
+                    <a href="{{ path('admin_add_product') }}"> <button class="text-center">Ajouter un produit</button></a>
+                </div>
 
-                <table class="table">
+                <table class="table table-list-article">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -34,7 +36,7 @@
                         <td>{{ product.description }}</td>
                         <td>{{ product.note }}</td>
                         <td>{{ product.avis }}</td>
-                        <td><a href="{{ asset('img/' ~ product.photo) }}">View brochure (PDF)</a></td>
+                        <td><img src="{{ asset('img/' ~ product.photo) }}"></td>
                         <td><a href="{{ path('admin_list_product', { 'status' : 'edit' , 'id' : product.id }) }}">Edit</a></td>
                         <td><a href="{{ path('admin_list_product', { 'status' : 'suppr' , 'id' : product.id} ) }}">Suppr</a></td>
 

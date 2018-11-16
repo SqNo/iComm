@@ -60,8 +60,8 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $product = $form->getData();
-            $file = new UploadedFile($product->getPhoto(), "Photo");
 
+            $file = new UploadedFile($product->getPhoto(), "Photo");
             $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
             try {
