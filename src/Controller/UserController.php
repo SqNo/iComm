@@ -26,7 +26,7 @@ class UserController extends AbstractController
         $this->em = $em;
     }
 
-    public function monCompte(Request $request)
+    public function monCompte(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
@@ -34,6 +34,10 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $updatedUser = $form->getData();
+
+            if (($newPass = $form->get("newPassword")->getData()) === $form->get("newPasswordConfirm")->getData()) {
+                $updatedUser->setPassword($encoder->encodePassword($updatedUser, $newPass));
+            }
 
             $this->em->persist($updatedUser);
             $this->em->flush();

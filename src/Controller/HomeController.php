@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -181,9 +182,24 @@ class HomeController extends AbstractController
             ]);
     }
 
-    public function contact()
+    public function contact(Request $request)
     {
-        return $this->render("Front/Pages/contact.html.twig");
+        $defaultData = array('message' => 'Type your message here');
+
+        $form = $this->createForm(ContactType::class, $defaultData);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+           $contactMail = $form->getData();
+            $this->addFlash(
+                'notice',
+                'Votre mail est bien parti pour la poubelle!'
+            );
+        }
+
+        return $this->render("Front/Pages/contact.html.twig", [
+            'form' => $form->createView(),
+        ]);
     }
 
     public function planSite()

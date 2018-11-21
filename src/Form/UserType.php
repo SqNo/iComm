@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,10 +16,22 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', TextType::class,[
-                'label' => 'Email'
+                'label' => 'Email',
+                'required' => false
             ])
             ->add('name', TextType::class,[
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'required' => false
+            ])
+            ->add('newPassword', PasswordType::class,[
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Nouveau mot de passe'
+                ])
+            ->add('newPasswordConfirm', PasswordType::class,[
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Confirmer nouveau mot de passe'
             ])
             ->add('Modifier', SubmitType::class, array('label' => 'Enregistrer'))
         ;
