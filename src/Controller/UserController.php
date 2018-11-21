@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\User;
+use App\Form\AdminAddUserType;
 use App\Form\ArticleType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
@@ -114,7 +116,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function adminAddUser(Request $request)
+    public function adminAddUser(Request $request, UserPasswordEncoderInterface $encoder)
     {
         if($id = $request->query->get("id")){
             $user = $this->em->find(User::class, $id);
@@ -122,11 +124,12 @@ class UserController extends AbstractController
         else
             $user = new User();
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(AdminAddUserType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
+            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
             $this->em->persist($user);
             $this->em->flush();
@@ -160,7 +163,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute("admin_add_user", ['id' => $id ]);
         }
 
-        $allUsers = $this->em->getRepository(User::class)->findAll();
+        $allUsers = $this->em->getRepository(User::class)->findBy([], ['roles' => 'DESC']);
 
         return $this->render("Back/Pages/adminListUsers.html.twig",[
             'users' => $allUsers,
